@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
-import makeStyles from "@mui/styles/makeStyles";
-import { Route, Redirect, Switch } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Container from "@mui/material/Container";
-
-import Login from "./components/pages/LoginPage";
+import makeStyles from "@mui/styles/makeStyles";
+import SignIn from "./component/login";
+import Home from "./component/home";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -21,11 +20,13 @@ const Routers = (props) => {
 
   return (
     <Container className={classes.content} maxWidth={false}>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/unauthorized" component={UnauthorizedPage} />
-        <Route path="*" component={NotFoundPage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/home" element={<Home />} />
+        {/* <Route path="/unauthorized" element={<UnauthorizedPage />} />
+        <Route path="*" element={<NotFoundPage />} /> */}
+      </Routes>
     </Container>
   );
 };
